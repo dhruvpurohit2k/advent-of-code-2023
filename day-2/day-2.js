@@ -1,3 +1,4 @@
+const { warn } = require("console");
 const fs = require("fs");
 
 fs.readFile(
@@ -21,26 +22,30 @@ fs.readFile(
       gamelist = game[1].split(";");
       // console.log(`gamelist - `);
       console.log(gamelist);
-      colorObj = { blue: 14, green: 13, red: 12 };
-      let state = true;
+      let blue = 0;
+      let red = 0;
+      let green = 0;
       gamelist.forEach((element) => {
-        colorObj;
+        blue;
+        green;
+        red;
         color = element.split(",");
-        state;
         color.forEach((ele) => {
           ele = ele.slice(1).split(" ");
           console.log(ele);
-          if (colorObj[`${ele[1]}`] < Number(ele[0])) {
-            state = false;
+          if (ele[1] == `blue` && blue < Number(ele[0])) {
+            blue = ele[0];
+          }
+          if (ele[1] == `red` && red < Number(ele[0])) {
+            red = ele[0];
+          }
+          if (ele[1] == `green` && green < Number(ele[0])) {
+            green = ele[0];
           }
         });
       });
-      if (state) {
-        sum += Number(obj["gameno"]);
-        console.log("possible");
-      } else {
-        console.log("impossible");
-      }
+      console.log(`blue - ${blue} green - ${green} red - ${red}`);
+      sum = sum + blue * red * green;
       console.log(sum);
     });
   },
